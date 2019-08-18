@@ -1,12 +1,16 @@
 const express = require('express');
+const cors = require('cors');
+
+const port = process.env.PORT || 3000;
 
 const app = express();
-const port = process.env.PORT || 3000;
+app.use(cors());
+
 const data = {
     data: [
-        { name: 'Chiem Janssen', age: 22, gender: 'MALE' },
-        { name: 'Tjarlie Fox', age: 21, gender: 'FEMALE' },
-        { name: 'Timmethy Dalton', age: 22, gender: 'MALE' }
+        { id: 1, name: 'Chiem Janssen', age: 22, gender: 'MALE' },
+        { id: 2, name: 'Tjarlie Fox', age: 21, gender: 'FEMALE' },
+        { id: 3, name: 'Timmethy Dalton', age: 22, gender: 'MALE' }
     ],
     meta: {
         status: 'OK',

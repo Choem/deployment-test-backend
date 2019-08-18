@@ -11,3 +11,5 @@ services:
       - .:/app
     environment: 
       - PORT=1337
+  redis-server:
+    image: 'redis'

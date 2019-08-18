@@ -1,7 +1,14 @@
 const express = require('express');
+const redis = require('redis');
 const cors = require('cors');
 
 const port = process.env.PORT || 3000;
+
+const redisClient = redis.createClient({
+    host: 'redis-server',
+    port: 6379
+});
+redisClient.set('visits', 0);
 
 const app = express();
 app.use(cors());
@@ -27,6 +34,13 @@ app.get('/', (req, res) => {
 
 app.get('/users', (req, res) => {
     res.send(data);
+});
+
+app.get('/visits', (req, res) => {
+    redisClient.get('visits', (err, visits) => {
+        res.send(`Number of visits is ${visits}`);
+        redisClient.set('visits', parseInt(visits) + 1);
+    });
 });
 
 app.listen(port, () => {
